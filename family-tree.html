@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family Tree — The Kundu Family</title>
+<title>Family Tree — Kundu Parivar</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
   <div class="wrap">
     <a class="brand" href="index.html">
       <span class="brand-mark">K</span>
-      <span class="brand-name">Kundu Parivar<small>Est. records from 1948</small></span>
+      <span class="brand-name">Kundu Parivar<small>Est. 1919</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     <nav class="site-nav" id="primary-nav">
@@ -31,7 +31,7 @@
   <div class="wrap">
     <p class="eyebrow">One root, endless branches</p>
     <h1>The Family Tree</h1>
-    <p class="lede">Drawn as an actual tree — trunk at the top, branching down through each generation. This is <strong>sample placeholder data</strong>; the structure is built to keep growing as new people are added. See "Adding someone new" below.</p>
+    <p class="lede">Four generations, starting with Ch. Des Raj Kundu in 1919. Drawn as an actual tree — trunk at the top, branching down through each generation.</p>
     <div class="divider"></div>
   </div>
 </section>
@@ -40,7 +40,7 @@
   <div class="wrap">
     <div class="tree-controls">
       <label for="tree-search" class="eyebrow" style="display:block;margin-bottom:8px;">Find someone</label>
-      <input id="tree-search" type="text" placeholder="Search a name, e.g. Rina, Aryan, Sen…" autocomplete="off">
+      <input id="tree-search" type="text" placeholder="Search a name, e.g. Mahideep, Ekagra…" autocomplete="off">
       <p id="tree-search-status" class="search-status" aria-live="polite"></p>
     </div>
   </div>
@@ -63,8 +63,8 @@
     </div>
     <div class="howto card">
       <p>The whole tree is built from one list in this file's code, called <code>treeData</code>. Every person is an object that can have its own <code>children</code> list — so the tree can grow to any size or depth without redesigning anything.</p>
-      <pre><code>{ name: "Kabir Kundu", years: "b. 2005", role: "Son", children: [] }</code></pre>
-      <p>To add a child to someone, find their entry in <code>treeData</code> near the bottom of this file, and add a new object like the one above inside their <code>children: [ ]</code> list. To add a whole new couple to an existing generation, copy an existing sibling's whole block and edit the details. Save the file, upload it back to GitHub, and the tree updates automatically.</p>
+      <pre><code>{ name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Son", children: [] }</code></pre>
+      <p>To add a child to someone, find their entry in <code>treeData</code> near the bottom of this file, and add a new object like the one above inside their <code>children: [ ]</code> list. To add a spouse, just edit the <code>name</code> field to "Person A & Person B". Save the file, upload it back to GitHub, and the tree updates automatically.</p>
     </div>
   </div>
 </section>
@@ -219,70 +219,34 @@
 
 <script>
   // ---- Family data --------------------------------------------------------
-  // Sample placeholder data. Replace with your real family.
-  // Structure: every person/couple is an object that can hold its own
-  // "children" array — nest as deep and as wide as the family actually is.
-  // See the "Adding someone new" section on this page for a copy-paste example.
+  // Real Kundu Parivar lineage. Structure: every person/couple is an object
+  // that can hold its own "children" array — nest as deep and as wide as
+  // the family actually is. See "Adding someone new" above for an example.
   const treeData = {
-    name: "The Kundu Family",
-    years: "",
-    role: "Family record, est. 1948",
+    name: "Ch. Des Raj Kundu & Smt. Khajani Devi",
+    years: "b. 21 Mar 1919 · DOB not recorded",
+    role: "Great grandparents — founding generation",
     isRoot: true,
     children: [
       {
-        name: "Nikhil & Bina Kundu",
-        years: "b. 1948 · b. 1951",
+        name: "Dr. Bhupender Singh Kundu & Smt. Durga Kundu",
+        years: "b. 27 Jan 1964 · b. 12 Dec 1966",
         role: "Grandparents",
         children: [
           {
-            name: "Amit & Rina Kundu",
-            years: "b. 1972 · b. 1975",
+            name: "Mahideep Singh Kundu & Priyanka Mandal",
+            years: "b. 11 May 1992 · b. 31 Jul 1993",
             role: "Son & daughter-in-law",
             children: [
-              { name: "Rohan Kundu", years: "b. 1998", role: "Grandson", children: [] },
-              { name: "Ishita Kundu", years: "b. 2001", role: "Granddaughter", children: [] }
+              { name: "Kumud Kundu", years: "b. 19 Feb 2024", role: "Daughter", children: [] }
             ]
           },
           {
-            name: "Sunanda Kundu Basu & Debashish Basu",
-            years: "b. 1975 · b. 1973",
-            role: "Daughter & son-in-law",
-            children: [
-              { name: "Aritra Basu", years: "b. 2000", role: "Grandson", children: [] },
-              { name: "Riya Basu", years: "b. 2003", role: "Granddaughter", children: [] }
-            ]
-          },
-          {
-            name: "Rajesh & Priya Kundu",
-            years: "b. 1978 · b. 1980",
+            name: "Kanwaldeep Singh Kundu & Sunita Ruhil",
+            years: "b. 8 Oct 1993 · b. 31 Mar 1998",
             role: "Son & daughter-in-law",
             children: [
-              { name: "Kabir Kundu", years: "b. 2005", role: "Grandson", children: [] }
-            ]
-          }
-        ]
-      },
-      {
-        name: "Prabir & Sova Kundu",
-        years: "b. 1950 · b. 1953",
-        role: "Grandparents · Nikhil's brother",
-        children: [
-          {
-            name: "Ananya Kundu Sen & Arindam Sen",
-            years: "b. 1974 · b. 1972",
-            role: "Daughter & son-in-law",
-            children: [
-              { name: "Sneha Sen", years: "b. 1999", role: "Granddaughter", children: [] },
-              { name: "Rudra Sen", years: "b. 2002", role: "Grandson", children: [] }
-            ]
-          },
-          {
-            name: "Subrata & Mitali Kundu",
-            years: "b. 1977 · b. 1979",
-            role: "Son & daughter-in-law",
-            children: [
-              { name: "Aryan Kundu", years: "b. 2006", role: "Grandson", children: [] },
-              { name: "Diya Kundu", years: "b. 2009", role: "Granddaughter", children: [] }
+              { name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Son", children: [] }
             ]
           }
         ]
