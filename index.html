@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Kundu Family</title>
+<meta name="description" content="The Kundu family — our tree, our stories, our gatherings, all in one place.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-name">Kundu Paribar<small>Est. records from 1948</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="site-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="family-tree.html">Family Tree</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="events.html">Events</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Welcome home</p>
+    <h1>The Kundu Family</h1>
+    <p class="lede">Four generations, one story still being written. This is our corner of the internet — for the tree, the photographs, the stories worth keeping, and the dates worth remembering.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Find your way around</p>
+      <h2>Where would you like to go?</h2>
+    </div>
+    <div class="nav-grid">
+      <a class="nav-card" href="family-tree.html">
+        <span class="nav-card-icon" aria-hidden="true">🌳</span>
+        <h3>Family Tree</h3>
+        <p>Three generations of Kundus, and the families who joined ours.</p>
+      </a>
+      <a class="nav-card" href="gallery.html">
+        <span class="nav-card-icon" aria-hidden="true">🖼️</span>
+        <h3>Gallery</h3>
+        <p>Weddings, festivals, reunions — the moments we keep coming back to.</p>
+      </a>
+      <a class="nav-card" href="stories.html">
+        <span class="nav-card-icon" aria-hidden="true">📖</span>
+        <h3>Stories</h3>
+        <p>Where we came from, and the small traditions that carried us here.</p>
+      </a>
+      <a class="nav-card" href="events.html">
+        <span class="nav-card-icon" aria-hidden="true">🗓️</span>
+        <h3>Events</h3>
+        <p>Birthdays, anniversaries, and the next time we're all together.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap intro-split">
+    <div class="intro-text">
+      <p class="eyebrow">A note to start</p>
+      <h2>Why this site exists</h2>
+      <p>Every family carries its history in scattered places — a grandmother's memory, an old photo album, a WhatsApp forward no one saved properly. This site is our attempt to put it all in one place, so a cousin ten years from now can still find out who Prabir Jethu's wife was, or when the last big reunion happened.</p>
+      <p>It's a living page. Every generation adds to it.</p>
+      <a class="btn btn-primary" href="family-tree.html">Explore the family tree</a>
+    </div>
+    <div class="intro-figure" aria-hidden="true">
+      <div class="ring-emblem">
+        <span>1948</span>
+        <span>—</span>
+        <span>Today</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-note">kundufamily.in — a private family archive</span>
+    <span class="foot-note">Built with care, not a company</span>
+  </div>
+</footer>
+
+<style>
+  .nav-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .nav-card{
+    display: block;
+    text-decoration: none;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 22px;
+    box-shadow: var(--paper-shadow);
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+  .nav-card:hover{ transform: translateY(-3px); border-color: var(--gold); }
+  .nav-card-icon{ font-size: 1.6rem; }
+  .nav-card h3{ margin: 12px 0 6px; font-size: 1.15rem; }
+  .nav-card p{ margin: 0; font-size: 0.92rem; color: #4a3c2c; }
+
+  .intro-split{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .intro-text p{ color: #4a3c2c; }
+  .intro-text .btn{ margin-top: 8px; }
+  .ring-emblem{
+    width: 220px; height: 220px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px;
+    font-family: var(--display);
+    color: var(--brick-dark);
+    position: relative;
+  }
+  .ring-emblem::before{
+    content: "";
+    position: absolute; inset: 14px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+  }
+  @media (max-width: 760px){
+    .intro-split{ grid-template-columns: 1fr; text-align: center; }
+  }
+</style>
+
+<script>
+  document.querySelector('.nav-toggle').addEventListener('click', function(){
+    var nav = document.getElementById('primary-nav');
+    var open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>

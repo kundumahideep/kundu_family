@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — The Kundu Family</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-name">Kundu Paribar<small>Est. records from 1948</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="site-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="family-tree.html">Family Tree</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="events.html">Events</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Moments, kept</p>
+    <h1>Gallery</h1>
+    <p class="lede">Reunions, festivals, and the everyday — organized by album. These tiles are placeholders; drop your own photos into an <code>images/</code> folder and update the file names in <code>gallery.html</code>.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<div id="albums-container"></div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-note">kundufamily.in — a private family archive</span>
+    <span class="foot-note">Photos live in <code>images/</code> · edit the <code>albums</code> array in gallery.html</span>
+  </div>
+</footer>
+
+<style>
+  .album-section{ padding: 40px 0; }
+  .album-section.alt{ background: var(--parchment); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .album-head{ margin-bottom: 24px; }
+  .album-head h2{ font-size: 1.5rem; margin-bottom: 4px; }
+  .album-head p{ font-family: var(--utility); font-size: 0.82rem; color: var(--sage-dark); margin: 0; }
+
+  .photo-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+  }
+  .polaroid{
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 10px 10px 16px;
+    box-shadow: var(--paper-shadow);
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform 0.2s ease;
+  }
+  .polaroid:nth-child(3n+1){ --tilt: -1.4deg; }
+  .polaroid:nth-child(3n+2){ --tilt: 1deg; }
+  .polaroid:nth-child(3n){ --tilt: -0.6deg; }
+  .polaroid:hover{ transform: rotate(0deg) translateY(-4px); }
+
+  .photo-placeholder{
+    aspect-ratio: 4 / 3;
+    border-radius: 2px;
+    background:
+      linear-gradient(135deg, var(--parchment-2), var(--parchment));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px;
+    color: var(--sage-dark);
+  }
+  .photo-placeholder .icon{ font-size: 1.8rem; opacity: 0.6; }
+  .photo-placeholder .hint{ font-family: var(--utility); font-size: 0.68rem; text-align: center; padding: 0 10px; opacity: 0.75; }
+
+  .polaroid figcaption{
+    font-family: var(--utility);
+    font-size: 0.82rem;
+    color: var(--ink);
+    padding-top: 10px;
+    text-align: center;
+  }
+  .polaroid figcaption .cap-sub{ display:block; font-size: 0.7rem; color: var(--sage-dark); margin-top:2px; }
+</style>
+
+<script>
+  // ---- Albums / photo data --------------------------------------------------
+  // Replace `file` with a real path once you add images to an images/ folder,
+  // e.g. file: "images/reunion-2022-01.jpg". Until then, placeholders show.
+  const albums = [
+    {
+      title: "Annual Family Reunion, 2022",
+      note: "Kolkata — everyone home for one weekend",
+      photos: [
+        { file: null, caption: "Group photo, front lawn", sub: "Add: reunion-2022-01.jpg" },
+        { file: null, caption: "Cousins' table", sub: "Add: reunion-2022-02.jpg" },
+        { file: null, caption: "Three generations", sub: "Add: reunion-2022-03.jpg" }
+      ]
+    },
+    {
+      title: "Durga Puja Celebrations",
+      note: "Our yearly gathering during the pujas",
+      photos: [
+        { file: null, caption: "Pandal visit, 2023", sub: "Add: puja-2023-01.jpg" },
+        { file: null, caption: "Anjali at dawn", sub: "Add: puja-2023-02.jpg" },
+        { file: null, caption: "Dinner together", sub: "Add: puja-2023-03.jpg" },
+        { file: null, caption: "The kids in new clothes", sub: "Add: puja-2023-04.jpg" }
+      ]
+    },
+    {
+      title: "Weddings & Ceremonies",
+      note: "The days that grew the family",
+      photos: [
+        { file: null, caption: "Rajesh & Priya's wedding", sub: "Add: wedding-rajesh-priya.jpg" },
+        { file: null, caption: "Subrata & Mitali's reception", sub: "Add: wedding-subrata-mitali.jpg" },
+        { file: null, caption: "Kabir's Annaprashan", sub: "Add: annaprashan-kabir.jpg" }
+      ]
+    },
+    {
+      title: "Growing Up",
+      note: "The youngest branch, through the years",
+      photos: [
+        { file: null, caption: "First day of school", sub: "Add: growing-up-01.jpg" },
+        { file: null, caption: "Summer holidays", sub: "Add: growing-up-02.jpg" },
+        { file: null, caption: "Birthday candles", sub: "Add: growing-up-03.jpg" }
+      ]
+    }
+  ];
+
+  const container = document.getElementById('albums-container');
+
+  albums.forEach((album, i) => {
+    const section = document.createElement('section');
+    section.className = 'album-section' + (i % 2 === 1 ? ' alt' : '');
+
+    const grid = album.photos.map(p => `
+      <figure class="polaroid">
+        ${p.file
+          ? `<img src="${p.file}" alt="${p.caption}" style="aspect-ratio:4/3;object-fit:cover;border-radius:2px;">`
+          : `<div class="photo-placeholder">
+               <span class="icon" aria-hidden="true">🖼️</span>
+               <span class="hint">${p.sub}</span>
+             </div>`
+        }
+        <figcaption>${p.caption}<span class="cap-sub">${album.title}</span></figcaption>
+      </figure>
+    `).join('');
+
+    section.innerHTML = `
+      <div class="wrap">
+        <div class="album-head">
+          <h2>${album.title}</h2>
+          <p>${album.note}</p>
+        </div>
+        <div class="photo-grid">${grid}</div>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  document.querySelector('.nav-toggle').addEventListener('click', function(){
+    var nav = document.getElementById('primary-nav');
+    var open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>

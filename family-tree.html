@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Tree — The Kundu Family</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-name">Kundu Paribar<small>Est. records from 1948</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="site-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="family-tree.html" class="active">Family Tree</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="events.html">Events</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Three generations, one root</p>
+    <h1>The Family Tree</h1>
+    <p class="lede">Nikhil and Prabir Kundu — brothers — are where our record begins. Everything below has grown from there. This is <strong>sample placeholder data</strong>; swap in your real family details in <code>family-tree.html</code>.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section class="tree-controls-section">
+  <div class="wrap">
+    <div class="tree-controls">
+      <label for="tree-search" class="eyebrow" style="display:block;margin-bottom:8px;">Find someone</label>
+      <input id="tree-search" type="text" placeholder="Search a name, e.g. Rina, Aryan, Sen…" autocomplete="off">
+      <p id="tree-search-status" class="search-status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section id="tree-root">
+  <div class="wrap" id="tree-container">
+    <!-- generations render here via JS -->
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-note">kundufamily.in — a private family archive</span>
+    <span class="foot-note">Data lives in family-tree.html → edit the <code>familyData</code> array</span>
+  </div>
+</footer>
+
+<style>
+  .tree-controls-section{ padding-top: 8px; padding-bottom: 8px; }
+  .tree-controls{ max-width: 420px; margin: 0 auto; text-align: center; }
+  .tree-controls input{
+    width: 100%;
+    font-family: var(--body);
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .tree-controls input:focus-visible{ outline: 2px solid var(--brick); outline-offset: 2px; }
+  .search-status{ font-family: var(--utility); font-size: 0.78rem; color: var(--sage-dark); min-height: 1.2em; margin-top: 8px; }
+
+  .generation{ padding: 44px 0; }
+  .generation + .generation{ border-top: 1px solid var(--line); }
+  .generation-head{
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 26px;
+  }
+  .gen-ring{
+    width: 46px; height: 46px; border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; color: var(--brick-dark);
+    flex-shrink: 0;
+  }
+  .generation-head h2{ font-size: 1.5rem; margin-bottom: 2px; }
+  .generation-head .gen-sub{ font-family: var(--utility); font-size: 0.8rem; color: var(--sage-dark); }
+
+  .family-group{
+    border-left: 3px solid var(--gold);
+    padding: 4px 0 4px 22px;
+    margin-bottom: 26px;
+  }
+  .family-group:last-child{ margin-bottom: 0; }
+  .couple-line{
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px;
+  }
+  .couple-line .names{ font-family: var(--display); font-size: 1.15rem; color: var(--walnut); font-weight: 600; }
+  .couple-line .years{ font-family: var(--utility); font-size: 0.78rem; color: var(--sage-dark); }
+  .role-tag{
+    font-family: var(--utility); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--brick); background: var(--parchment); border: 1px solid var(--line);
+    padding: 2px 9px; border-radius: 999px;
+  }
+  .children-row{
+    margin-top: 12px;
+    padding-left: 20px;
+    border-left: 2px dashed var(--line);
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .child-chip{
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: var(--utility);
+    font-size: 0.85rem;
+  }
+  .child-chip .cname{ font-weight: 600; color: var(--walnut); }
+  .child-chip .cyear{ color: var(--sage-dark); margin-left: 6px; }
+
+  .no-match{ display:none; }
+  [data-match="0"]{ display: none; }
+</style>
+
+<script>
+  // ---- Family data ------------------------------------------------------
+  // Sample placeholder data. Replace names, years, and structure with your
+  // real family. Each generation is an array of "family groups" — a couple
+  // (or single ancestor) plus their children.
+  const familyData = [
+    {
+      label: "Generation I",
+      roman: "I",
+      sub: "The grandparents — where the record begins",
+      groups: [
+        {
+          names: "Nikhil & Bina Kundu",
+          years: "b. 1948 · b. 1951",
+          role: "Grandparents",
+          children: []
+        },
+        {
+          names: "Prabir & Sova Kundu",
+          years: "b. 1950 · b. 1953",
+          role: "Grandparents · Nikhil's brother",
+          children: []
+        }
+      ]
+    },
+    {
+      label: "Generation II",
+      roman: "II",
+      sub: "Children of Nikhil & Bina, and of Prabir & Sova",
+      groups: [
+        { names: "Amit & Rina Kundu", years: "b. 1972 · b. 1975", role: "Son & daughter-in-law", children: ["Rohan Kundu — b. 1998", "Ishita Kundu — b. 2001"] },
+        { names: "Sunanda Kundu Basu & Debashish Basu", years: "b. 1975 · b. 1973", role: "Daughter & son-in-law", children: ["Aritra Basu — b. 2000", "Riya Basu — b. 2003"] },
+        { names: "Rajesh & Priya Kundu", years: "b. 1978 · b. 1980", role: "Son & daughter-in-law", children: ["Kabir Kundu — b. 2005"] },
+        { names: "Ananya Kundu Sen & Arindam Sen", years: "b. 1974 · b. 1972", role: "Daughter & son-in-law", children: ["Sneha Sen — b. 1999", "Rudra Sen — b. 2002"] },
+        { names: "Subrata & Mitali Kundu", years: "b. 1977 · b. 1979", role: "Son & daughter-in-law", children: ["Aryan Kundu — b. 2006", "Diya Kundu — b. 2009"] }
+      ]
+    },
+    {
+      label: "Generation III",
+      roman: "III",
+      sub: "The grandchildren — our newest branches",
+      groups: [
+        { names: "Rohan Kundu", years: "b. 1998", role: "Grandson of Nikhil & Bina", children: [] },
+        { names: "Ishita Kundu", years: "b. 2001", role: "Granddaughter of Nikhil & Bina", children: [] },
+        { names: "Aritra & Riya Basu", years: "b. 2000 · b. 2003", role: "Children of Sunanda & Debashish", children: [] },
+        { names: "Kabir Kundu", years: "b. 2005", role: "Grandson of Nikhil & Bina", children: [] },
+        { names: "Sneha & Rudra Sen", years: "b. 1999 · b. 2002", role: "Children of Ananya & Arindam", children: [] },
+        { names: "Aryan & Diya Kundu", years: "b. 2006 · b. 2009", role: "Children of Subrata & Mitali", children: [] }
+      ]
+    }
+  ];
+
+  // ---- Render -------------------------------------------------------------
+  const container = document.getElementById('tree-container');
+
+  familyData.forEach(gen => {
+    const genEl = document.createElement('div');
+    genEl.className = 'generation';
+    genEl.dataset.gen = gen.label;
+
+    genEl.innerHTML = `
+      <div class="generation-head">
+        <span class="gen-ring">${gen.roman}</span>
+        <div>
+          <h2>${gen.label}</h2>
+          <p class="gen-sub">${gen.sub}</p>
+        </div>
+      </div>
+      <div class="groups"></div>
+    `;
+
+    const groupsWrap = genEl.querySelector('.groups');
+
+    gen.groups.forEach(group => {
+      const groupEl = document.createElement('div');
+      groupEl.className = 'family-group';
+      groupEl.dataset.searchtext = (group.names + ' ' + group.children.join(' ')).toLowerCase();
+
+      let childrenHtml = '';
+      if (group.children.length) {
+        childrenHtml = `<div class="children-row">` + group.children.map(c => {
+          const [cname, cyear] = c.split(' — ');
+          return `<span class="child-chip"><span class="cname">${cname}</span><span class="cyear">${cyear || ''}</span></span>`;
+        }).join('') + `</div>`;
+      }
+
+      groupEl.innerHTML = `
+        <div class="couple-line">
+          <span class="names">${group.names}</span>
+          <span class="years">${group.years}</span>
+          <span class="role-tag">${group.role}</span>
+        </div>
+        ${childrenHtml}
+      `;
+      groupsWrap.appendChild(groupEl);
+    });
+
+    container.appendChild(genEl);
+  });
+
+  // ---- Search / filter ------------------------------------------------------
+  const searchInput = document.getElementById('tree-search');
+  const statusEl = document.getElementById('tree-search-status');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let matches = 0;
+    document.querySelectorAll('.family-group').forEach(el => {
+      const isMatch = q === '' || el.dataset.searchtext.includes(q);
+      el.setAttribute('data-match', isMatch ? '1' : '0');
+      if (isMatch) matches++;
+    });
+    statusEl.textContent = q === '' ? '' : `${matches} match${matches === 1 ? '' : 'es'} found`;
+  });
+
+  // ---- Mobile nav toggle ------------------------------------------------------
+  document.querySelector('.nav-toggle').addEventListener('click', function(){
+    var nav = document.getElementById('primary-nav');
+    var open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>

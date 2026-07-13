@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — The Kundu Family</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">K</span>
+      <span class="brand-name">Kundu Paribar<small>Est. records from 1948</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="site-nav" id="primary-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="family-tree.html">Family Tree</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Dates worth remembering</p>
+    <h1>Events</h1>
+    <p class="lede">Birthdays, anniversaries, and the gatherings that bring everyone back together. Sample dates below — replace with your family's real ones.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">This month</p>
+      <h2>Coming up</h2>
+    </div>
+    <div class="ledger" id="upcoming-ledger"></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The full record</p>
+      <h2>Birthdays &amp; anniversaries</h2>
+    </div>
+    <div class="ledger" id="all-ledger"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Looking back</p>
+      <h2>Past gatherings</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year">2024</span>
+        <div><h3>Durga Puja Reunion</h3><p>Kolkata — the whole family together for the first time in three years.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2023</span>
+        <div><h3>Subrata &amp; Mitali's Wedding Reception</h3><p>The newest household joins the family ledger.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2022</span>
+        <div><h3>Annual Family Reunion</h3><p>The reunion that restarted the tradition after the pandemic years.</p></div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2005</span>
+        <div><h3>Kabir's Annaprashan</h3><p>The youngest generation's first rice-eating ceremony.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-note">kundufamily.in — a private family archive</span>
+    <span class="foot-note">Edit the <code>occasions</code> array in events.html to update dates</span>
+  </div>
+</footer>
+
+<style>
+  .ledger{ max-width: 720px; margin: 0 auto; }
+  .ledger-row{
+    display: flex; align-items: center; gap: 18px;
+    padding: 14px 4px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .ledger-row:last-child{ border-bottom: none; }
+  .ledger-date{
+    font-family: var(--display); font-weight: 600; color: var(--brick-dark);
+    width: 84px; flex-shrink: 0; font-size: 1rem;
+  }
+  .ledger-who{ font-family: var(--body); flex: 1; }
+  .ledger-who .lname{ font-weight: 600; color: var(--walnut); }
+  .ledger-tag{
+    font-family: var(--utility); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--sage-dark); background: var(--parchment); border: 1px solid var(--line);
+    padding: 3px 9px; border-radius: 999px; flex-shrink: 0;
+  }
+  .empty-note{ font-family: var(--utility); font-size: 0.85rem; color: var(--sage-dark); text-align:center; padding: 20px 0; }
+
+  .timeline{ max-width: 640px; margin: 0 auto; }
+  .tl-item{ display: flex; gap: 22px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .tl-item:last-child{ border-bottom: none; }
+  .tl-year{ font-family: var(--display); font-weight: 700; color: var(--gold); font-size: 1.3rem; width: 64px; flex-shrink: 0; }
+  .tl-item h3{ font-size: 1.05rem; margin-bottom: 4px; }
+  .tl-item p{ margin: 0; color: #4a3c2c; font-size: 0.92rem; }
+</style>
+
+<script>
+  // ---- Occasions data ---------------------------------------------------
+  // month/day only is enough for recurring birthdays & anniversaries.
+  const occasions = [
+    { month: 1, day: 14, name: "Nikhil Kundu", type: "Birthday" },
+    { month: 2, day: 3,  name: "Bina Kundu", type: "Birthday" },
+    { month: 3, day: 22, name: "Amit & Rina Kundu", type: "Anniversary" },
+    { month: 4, day: 9,  name: "Rohan Kundu", type: "Birthday" },
+    { month: 5, day: 18, name: "Ishita Kundu", type: "Birthday" },
+    { month: 6, day: 2,  name: "Prabir & Sova Kundu", type: "Anniversary" },
+    { month: 7, day: 27, name: "Subrata Kundu", type: "Birthday" },
+    { month: 8, day: 11, name: "Sneha Sen", type: "Birthday" },
+    { month: 9, day: 5,  name: "Rajesh & Priya Kundu", type: "Anniversary" },
+    { month: 10, day: 30, name: "Kabir Kundu", type: "Birthday" },
+    { month: 11, day: 16, name: "Aryan Kundu", type: "Birthday" },
+    { month: 12, day: 8,  name: "Diya Kundu", type: "Birthday" }
+  ];
+
+  const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function renderLedger(el, items) {
+    if (!items.length) {
+      el.innerHTML = `<p class="empty-note">Nothing here yet.</p>`;
+      return;
+    }
+    el.innerHTML = items.map(o => `
+      <div class="ledger-row">
+        <span class="ledger-date">${monthNames[o.month-1]} ${o.day}</span>
+        <span class="ledger-who"><span class="lname">${o.name}</span></span>
+        <span class="ledger-tag">${o.type}</span>
+      </div>
+    `).join('');
+  }
+
+  const today = new Date();
+  const thisMonth = today.getMonth() + 1;
+
+  const upcoming = occasions
+    .filter(o => o.month === thisMonth)
+    .sort((a,b) => a.day - b.day);
+
+  const all = [...occasions].sort((a,b) => a.month - b.month || a.day - b.day);
+
+  renderLedger(document.getElementById('upcoming-ledger'), upcoming);
+  renderLedger(document.getElementById('all-ledger'), all);
+
+  document.querySelector('.nav-toggle').addEventListener('click', function(){
+    var nav = document.getElementById('primary-nav');
+    var open = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>
