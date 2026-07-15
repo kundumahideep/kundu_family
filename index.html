@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kundu Parivar</title>
-<meta name="description" content="The Kundu family — our tree, our stories, our gatherings, all in one place.">
+<meta name="description" content="Kundu Parivar — a family register tracing twenty-six generations, from Mahiyal to the newest addition to the family.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="site-header">
+<header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">K</span>
+    <a class="brandline" href="index.html">
+      <span class="crest">K</span>
       <span class="brand-name">Kundu Parivar<small>Est. 1919</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
@@ -30,10 +30,10 @@
 
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">Welcome home</p>
+    <p class="eyebrow">A family register</p>
     <h1>Kundu Parivar</h1>
-    <p class="lede">Four generations, one story still being written. This is our corner of the internet — for the tree, the photographs, the stories worth keeping, and the dates worth remembering.</p>
-    <div class="divider"></div>
+    <p class="lede">Twenty-six generations in one continuous line — from Mahiyal, our earliest recorded ancestor, down through Ch. Des Raj Kundu in 1919, to the newest addition to the family today.</p>
+    <div class="ornament"><span></span></div>
   </div>
 </section>
 
@@ -45,24 +45,24 @@
     </div>
     <div class="nav-grid">
       <a class="nav-card" href="family-tree.html">
-        <span class="nav-card-icon" aria-hidden="true">🌳</span>
+        <span class="nav-card-icon" aria-hidden="true">&#127795;</span>
         <h3>Family Tree</h3>
-        <p>Three generations of Kundus, and the families who joined ours.</p>
+        <p>An unbroken line of twenty-six generations, from Mahiyal to today.</p>
       </a>
       <a class="nav-card" href="gallery.html">
-        <span class="nav-card-icon" aria-hidden="true">🖼️</span>
+        <span class="nav-card-icon" aria-hidden="true">&#128444;&#65039;</span>
         <h3>Gallery</h3>
         <p>Weddings, festivals, reunions — the moments we keep coming back to.</p>
       </a>
       <a class="nav-card" href="stories.html">
-        <span class="nav-card-icon" aria-hidden="true">📖</span>
+        <span class="nav-card-icon" aria-hidden="true">&#128220;</span>
         <h3>Stories</h3>
         <p>Where we came from, and the small traditions that carried us here.</p>
       </a>
       <a class="nav-card" href="events.html">
-        <span class="nav-card-icon" aria-hidden="true">🗓️</span>
+        <span class="nav-card-icon" aria-hidden="true">&#128198;</span>
         <h3>Events</h3>
-        <p>Birthdays, anniversaries, and the next time we're all together.</p>
+        <p>Birthdays, anniversaries, and those we hold in memory.</p>
       </a>
     </div>
   </div>
@@ -72,15 +72,15 @@
   <div class="wrap intro-split">
     <div class="intro-text">
       <p class="eyebrow">A note to start</p>
-      <h2>Why this site exists</h2>
-      <p>Every family carries its history in scattered places — a grandmother's memory, an old photo album, a WhatsApp forward no one saved properly. This site is our attempt to put it all in one place, so a cousin ten years from now can still find out who Prabir Jethu's wife was, or when the last big reunion happened.</p>
-      <p>It's a living page. Every generation adds to it.</p>
+      <h2>Why this register exists</h2>
+      <p>A family chart once carried by hand from one gathering to the next only survives as long as someone keeps carrying it. This site is that chart, kept somewhere it can't be misplaced — twenty-two generations of recorded ancestry leading to Ch. Des Raj Kundu, and four more generations since, all in one place.</p>
+      <p>It is a living record. Every generation adds to it.</p>
       <a class="btn btn-primary" href="family-tree.html">Explore the family tree</a>
     </div>
     <div class="intro-figure" aria-hidden="true">
       <div class="ring-emblem">
-        <span>1919</span>
-        <span>—</span>
+        <span>Mahiyal</span>
+        <span>&mdash;</span>
         <span>Today</span>
       </div>
     </div>
@@ -89,61 +89,38 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="foot-note">kundufamily.in — a private family archive</span>
-    <span class="foot-note">Built with care, not a company</span>
+    <span class="foot-note">kundufamily.in &mdash; a private family archive</span>
+    <span class="foot-note">Twenty-six generations recorded, and counting</span>
   </div>
 </footer>
 
 <style>
   .nav-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
   }
   .nav-card{
-    display: block;
-    text-decoration: none;
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 26px 22px;
-    box-shadow: var(--paper-shadow);
+    display: block; text-decoration: none;
+    background: var(--ivory); border: 1px solid var(--line); border-radius: 4px;
+    padding: 28px 22px; box-shadow: var(--shadow);
     transition: transform 0.18s ease, border-color 0.18s ease;
   }
   .nav-card:hover{ transform: translateY(-3px); border-color: var(--gold); }
   .nav-card-icon{ font-size: 1.6rem; }
-  .nav-card h3{ margin: 12px 0 6px; font-size: 1.15rem; }
+  .nav-card h3{ margin: 14px 0 6px; font-size: 1.2rem; }
   .nav-card p{ margin: 0; font-size: 0.92rem; color: #4a3c2c; }
 
-  .intro-split{
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
+  .intro-split{ display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
   .intro-text p{ color: #4a3c2c; }
   .intro-text .btn{ margin-top: 8px; }
   .ring-emblem{
-    width: 220px; height: 220px;
-    margin: 0 auto;
-    border-radius: 50%;
+    width: 220px; height: 220px; margin: 0 auto; border-radius: 50%;
     border: 1.5px solid var(--gold);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 4px;
-    font-family: var(--display);
-    color: var(--brick-dark);
-    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    font-family: var(--display); color: var(--green); position: relative; text-align: center;
   }
-  .ring-emblem::before{
-    content: "";
-    position: absolute; inset: 14px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-  }
-  @media (max-width: 760px){
-    .intro-split{ grid-template-columns: 1fr; text-align: center; }
-  }
+  .ring-emblem::before{ content:""; position:absolute; inset:14px; border:1px solid var(--line); border-radius:50%; }
+  .ring-emblem span:first-child, .ring-emblem span:last-child{ font-size: 1.05rem; font-weight: 600; }
+  @media (max-width: 760px){ .intro-split{ grid-template-columns: 1fr; text-align: center; } }
 </style>
 
 <script>

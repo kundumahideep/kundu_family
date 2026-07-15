@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">K</span>
+    <a class="brandline" href="index.html">
+      <span class="crest">K</span>
       <span class="brand-name">Kundu Parivar<small>Est. 1919</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
@@ -31,8 +31,8 @@
   <div class="wrap">
     <p class="eyebrow">Moments, kept</p>
     <h1>Gallery</h1>
-    <p class="lede">Reunions, festivals, and the everyday — organized by album. These tiles are placeholders; drop your own photos into an <code>images/</code> folder and update the file names in <code>gallery.html</code>.</p>
-    <div class="divider"></div>
+    <p class="lede">Reunions, festivals, and the everyday — organized by album. These frames are placeholders; add your own photos to an <code>images/</code> folder and update the file names in <code>gallery.html</code>.</p>
+    <div class="ornament"><span></span></div>
   </div>
 </section>
 
@@ -40,99 +40,83 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="foot-note">kundufamily.in — a private family archive</span>
-    <span class="foot-note">Photos live in <code>images/</code> · edit the <code>albums</code> array in gallery.html</span>
+    <span class="foot-note">kundufamily.in &mdash; a private family archive</span>
+    <span class="foot-note">Photos live in <code>images/</code> &middot; edit the <code>albums</code> array in gallery.html</span>
   </div>
 </footer>
 
 <style>
-  .album-section{ padding: 40px 0; }
-  .album-section.alt{ background: var(--parchment); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .album-head{ margin-bottom: 24px; }
+  .album-section{ padding: 46px 0; }
+  .album-section.alt{ background: var(--ivory-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .album-head{ margin-bottom: 26px; }
   .album-head h2{ font-size: 1.5rem; margin-bottom: 4px; }
-  .album-head p{ font-family: var(--utility); font-size: 0.82rem; color: var(--sage-dark); margin: 0; }
+  .album-head p{ font-family: var(--utility); font-size: 0.82rem; color: var(--maroon); margin: 0; }
 
-  .photo-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 22px;
-  }
-  .polaroid{
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 10px 10px 16px;
-    box-shadow: var(--paper-shadow);
-    transform: rotate(var(--tilt, 0deg));
-    transition: transform 0.2s ease;
-  }
-  .polaroid:nth-child(3n+1){ --tilt: -1.4deg; }
-  .polaroid:nth-child(3n+2){ --tilt: 1deg; }
-  .polaroid:nth-child(3n){ --tilt: -0.6deg; }
-  .polaroid:hover{ transform: rotate(0deg) translateY(-4px); }
+  .photo-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 24px; }
 
+  .frame{
+    background: var(--ivory);
+    border: 1px solid var(--gold);
+    outline: 1px solid var(--line);
+    outline-offset: 4px;
+    border-radius: 2px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+  }
   .photo-placeholder{
     aspect-ratio: 4 / 3;
-    border-radius: 2px;
-    background:
-      linear-gradient(135deg, var(--parchment-2), var(--parchment));
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 6px;
-    color: var(--sage-dark);
+    background: linear-gradient(135deg, var(--ivory-2), var(--ivory));
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    color: var(--maroon);
   }
-  .photo-placeholder .icon{ font-size: 1.8rem; opacity: 0.6; }
-  .photo-placeholder .hint{ font-family: var(--utility); font-size: 0.68rem; text-align: center; padding: 0 10px; opacity: 0.75; }
+  .photo-placeholder .icon{ font-size: 1.7rem; opacity: 0.55; }
+  .photo-placeholder .hint{ font-family: var(--utility); font-size: 0.68rem; text-align: center; padding: 0 10px; opacity: 0.8; }
 
-  .polaroid figcaption{
-    font-family: var(--utility);
-    font-size: 0.82rem;
-    color: var(--ink);
-    padding-top: 10px;
-    text-align: center;
-  }
-  .polaroid figcaption .cap-sub{ display:block; font-size: 0.7rem; color: var(--sage-dark); margin-top:2px; }
+  .frame figcaption{ font-family: var(--utility); font-size: 0.82rem; color: var(--ink); padding-top: 12px; text-align: center; }
+  .frame figcaption .cap-sub{ display:block; font-size: 0.68rem; color: var(--maroon); margin-top:3px; letter-spacing: 0.03em; }
 </style>
 
 <script>
   // ---- Albums / photo data --------------------------------------------------
   // Replace `file` with a real path once you add images to an images/ folder,
-  // e.g. file: "images/reunion-2022-01.jpg". Until then, placeholders show.
+  // e.g. file: "images/reunion-2024-01.jpg". Until then, placeholders show.
   const albums = [
     {
-      title: "Annual Family Reunion, 2022",
-      note: "Kolkata — everyone home for one weekend",
+      title: "Family Reunions",
+      note: "The gatherings that bring everyone home",
       photos: [
-        { file: null, caption: "Group photo, front lawn", sub: "Add: reunion-2022-01.jpg" },
-        { file: null, caption: "Cousins' table", sub: "Add: reunion-2022-02.jpg" },
-        { file: null, caption: "Three generations", sub: "Add: reunion-2022-03.jpg" }
+        { file: null, caption: "Group portrait, front lawn", sub: "Add: reunion-01.jpg" },
+        { file: null, caption: "Three generations together", sub: "Add: reunion-02.jpg" },
+        { file: null, caption: "Cousins' table", sub: "Add: reunion-03.jpg" }
       ]
     },
     {
-      title: "Durga Puja Celebrations",
-      note: "Our yearly gathering during the pujas",
+      title: "Festivals & Celebrations",
+      note: "Diwali, Lohri, and the yearly rituals that mark the calendar",
       photos: [
-        { file: null, caption: "Pandal visit, 2023", sub: "Add: puja-2023-01.jpg" },
-        { file: null, caption: "Anjali at dawn", sub: "Add: puja-2023-02.jpg" },
-        { file: null, caption: "Dinner together", sub: "Add: puja-2023-03.jpg" },
-        { file: null, caption: "The kids in new clothes", sub: "Add: puja-2023-04.jpg" }
+        { file: null, caption: "Lighting diyas together", sub: "Add: festival-01.jpg" },
+        { file: null, caption: "The whole family, dressed up", sub: "Add: festival-02.jpg" },
+        { file: null, caption: "Evening prayers", sub: "Add: festival-03.jpg" },
+        { file: null, caption: "Sweets and stories after", sub: "Add: festival-04.jpg" }
       ]
     },
     {
       title: "Weddings & Ceremonies",
       note: "The days that grew the family",
       photos: [
-        { file: null, caption: "Rajesh & Priya's wedding", sub: "Add: wedding-rajesh-priya.jpg" },
-        { file: null, caption: "Subrata & Mitali's reception", sub: "Add: wedding-subrata-mitali.jpg" },
-        { file: null, caption: "Kabir's Annaprashan", sub: "Add: annaprashan-kabir.jpg" }
+        { file: null, caption: "Bhupender & Durga's wedding", sub: "Add: wedding-bhupender-durga.jpg" },
+        { file: null, caption: "Mahideep & Priyanka's wedding", sub: "Add: wedding-mahideep-priyanka.jpg" },
+        { file: null, caption: "Kanwaldeep & Sunita's wedding", sub: "Add: wedding-kanwaldeep-sunita.jpg" }
       ]
     },
     {
       title: "Growing Up",
       note: "The youngest branch, through the years",
       photos: [
-        { file: null, caption: "First day of school", sub: "Add: growing-up-01.jpg" },
-        { file: null, caption: "Summer holidays", sub: "Add: growing-up-02.jpg" },
-        { file: null, caption: "Birthday candles", sub: "Add: growing-up-03.jpg" }
+        { file: null, caption: "Kumud's first birthday", sub: "Add: growing-up-kumud.jpg" },
+        { file: null, caption: "Ekagra, newly arrived", sub: "Add: growing-up-ekagra.jpg" },
+        { file: null, caption: "First day of school", sub: "Add: growing-up-03.jpg" }
       ]
     }
   ];
@@ -144,11 +128,11 @@
     section.className = 'album-section' + (i % 2 === 1 ? ' alt' : '');
 
     const grid = album.photos.map(p => `
-      <figure class="polaroid">
+      <figure class="frame">
         ${p.file
-          ? `<img src="${p.file}" alt="${p.caption}" style="aspect-ratio:4/3;object-fit:cover;border-radius:2px;">`
+          ? `<img src="${p.file}" alt="${p.caption}" style="aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line);">`
           : `<div class="photo-placeholder">
-               <span class="icon" aria-hidden="true">🖼️</span>
+               <span class="icon" aria-hidden="true">&#128444;&#65039;</span>
                <span class="hint">${p.sub}</span>
              </div>`
         }

@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">K</span>
+    <a class="brandline" href="index.html">
+      <span class="crest">K</span>
       <span class="brand-name">Kundu Parivar<small>Est. 1919</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
@@ -29,10 +29,10 @@
 
 <section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">One root, endless branches</p>
+    <p class="eyebrow">One trunk, one family</p>
     <h1>The Family Tree</h1>
-    <p class="lede">Four generations, starting with Ch. Des Raj Kundu in 1919. Drawn as an actual tree — trunk at the top, branching down through each generation.</p>
-    <div class="divider"></div>
+    <p class="lede">Twenty-six generations in one continuous line — twenty-two of them a single ancestral thread down to Ch. Des Raj Kundu in 1919, then four generations more to today.</p>
+    <div class="ornament"><span></span></div>
   </div>
 </section>
 
@@ -40,7 +40,7 @@
   <div class="wrap">
     <div class="tree-controls">
       <label for="tree-search" class="eyebrow" style="display:block;margin-bottom:8px;">Find someone</label>
-      <input id="tree-search" type="text" placeholder="Search a name, e.g. Mahideep, Ekagra…" autocomplete="off">
+      <input id="tree-search" type="text" placeholder="Search a name, e.g. Mahideep, Ekagra, Karamchand…" autocomplete="off">
       <p id="tree-search-status" class="search-status" aria-live="polite"></p>
     </div>
   </div>
@@ -49,9 +49,10 @@
 <section>
   <div class="wrap tree-scroll-wrap">
     <div class="tree-scroll">
-      <ul class="tree" id="tree-root"></ul>
+      <ul class="tree" id="tree-diagram-root"></ul>
     </div>
-    <p class="scroll-hint">← scroll sideways if the tree is wider than your screen →</p>
+    <p class="scroll-hint">&larr; scroll sideways if the tree is wider than your screen &rarr;</p>
+    <div class="tree-accordion" id="tree-accordion-root"></div>
   </div>
 </section>
 
@@ -62,191 +63,164 @@
       <h2>Adding someone new</h2>
     </div>
     <div class="howto card">
-      <p>The whole tree is built from one list in this file's code, called <code>treeData</code>. Every person is an object that can have its own <code>children</code> list — so the tree can grow to any size or depth without redesigning anything.</p>
-      <pre><code>{ name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Son", children: [] }</code></pre>
-      <p>To add a child to someone, find their entry in <code>treeData</code> near the bottom of this file, and add a new object like the one above inside their <code>children: [ ]</code> list. To add a spouse, just edit the <code>name</code> field to "Person A & Person B". Save the file, upload it back to GitHub, and the tree updates automatically.</p>
+      <p>Most of the tree — everyone from Ch. Des Raj Kundu onward — is one list in this file's code, called <code>desRajNode</code>. Every person is an object that can have its own <code>children</code> list, so the tree can grow to any size or depth.</p>
+      <pre><code>{ name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Great-grandson", children: [] }</code></pre>
+      <p>To add a child to someone, find their entry in <code>desRajNode</code> and add a new object like the one above inside their <code>children: [ ]</code> list. To add a spouse, edit the <code>name</code> field to "Person A & Person B".</p>
+      <p>The long ancestral line above Des Raj (Mahiyal through Karamchand) is generated from a separate plain list called <code>ancestralNames</code> near the top of the code — just names in order, no need to touch its structure to extend it further back if more names come to light.</p>
     </div>
   </div>
 </section>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span class="foot-note">kundufamily.in — a private family archive</span>
-    <span class="foot-note">Data lives in family-tree.html → edit the <code>treeData</code> object</span>
+    <span class="foot-note">kundufamily.in &mdash; a private family archive</span>
+    <span class="foot-note">Data lives in family-tree.html &rarr; edit <code>desRajNode</code> or <code>ancestralNames</code></span>
   </div>
 </footer>
 
 <style>
   .tree-controls-section{ padding-top: 8px; padding-bottom: 8px; }
-  .tree-controls{ max-width: 420px; margin: 0 auto; text-align: center; }
+  .tree-controls{ max-width: 440px; margin: 0 auto; text-align: center; }
   .tree-controls input{
-    width: 100%;
-    font-family: var(--body);
-    font-size: 1rem;
-    padding: 12px 16px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: var(--cream);
-    color: var(--ink);
+    width: 100%; font-family: var(--body); font-size: 1rem;
+    padding: 12px 16px; border-radius: 2px; border: 1px solid var(--line);
+    background: var(--ivory); color: var(--ink);
   }
-  .tree-controls input:focus-visible{ outline: 2px solid var(--brick); outline-offset: 2px; }
-  .search-status{ font-family: var(--utility); font-size: 0.78rem; color: var(--sage-dark); min-height: 1.2em; margin-top: 8px; }
+  .tree-controls input:focus-visible{ outline: 2px solid var(--maroon); outline-offset: 2px; }
+  .search-status{ font-family: var(--utility); font-size: 0.78rem; color: var(--green); min-height: 1.2em; margin-top: 8px; }
 
   .tree-scroll-wrap{ max-width: 100%; }
-  .tree-scroll{
-    overflow-x: auto;
-    overflow-y: visible;
-    padding: 10px 0 30px;
-  }
-  .scroll-hint{
-    text-align: center;
-    font-family: var(--utility);
-    font-size: 0.74rem;
-    color: var(--sage-dark);
-    margin: 0;
-  }
+  .tree-scroll{ overflow-x: auto; overflow-y: visible; padding: 10px 0 30px; }
+  .scroll-hint{ text-align: center; font-family: var(--utility); font-size: 0.74rem; color: var(--maroon); margin: 0 0 20px; }
 
-  /* ---------- the tree diagram itself ---------- */
-  .tree, .tree ul, .tree li{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-  }
-  .tree{
-    display: inline-flex;
-    justify-content: center;
-    min-width: 100%;
-    padding-top: 6px;
-  }
-  .tree ul{
-    display: flex;
-    padding-top: 42px;
-  }
-  .tree li{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 42px 14px 0;
-  }
+  /* ---------- the tree diagram itself (desktop) ---------- */
+  .tree, .tree ul, .tree li{ list-style: none; margin: 0; padding: 0; position: relative; }
+  .tree{ display: inline-flex; justify-content: center; min-width: 100%; padding-top: 6px; }
+  .tree ul{ display: flex; padding-top: 42px; }
+  .tree li{ display: flex; flex-direction: column; align-items: center; padding: 42px 14px 0; }
 
-  /* sibling connectors */
-  .tree li::before, .tree li::after{
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 42px;
-    border-top: 2px solid var(--gold);
-  }
-  .tree li::before{ right: 50%; }
-  .tree li::after{ left: 50%; border-left: 2px solid var(--gold); }
-  .tree li:only-child::before, .tree li:only-child::after{ display: none; }
-  .tree li:only-child{ padding-top: 0; }
-  .tree li:first-child::before{ border: 0 none; }
-  .tree li:last-child::after{ border: 0 none; }
-  .tree li:last-child::before{ border-right: 2px solid var(--gold); border-radius: 0 6px 0 0; }
-  .tree li:first-child::after{ border-radius: 6px 0 0 0; }
-
-  /* vertical connector from a node down into its children row */
-  .tree li ul::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    border-left: 2px solid var(--gold);
-    width: 0;
-    height: 42px;
-  }
-  /* the outermost row (root) has no parent line above it */
-  .tree > li::before, .tree > li::after{ display: none; }
-  .tree > li{ padding-top: 0; }
+  .tree li::before, .tree li::after{ content:''; position:absolute; top:0; width:50%; height:42px; border-top:2px solid var(--gold); }
+  .tree li::before{ right:50%; }
+  .tree li::after{ left:50%; border-left:2px solid var(--gold); }
+  .tree li:only-child::before, .tree li:only-child::after{ display:none; }
+  .tree li:only-child{ padding-top:0; }
+  .tree li:first-child::before{ border:0 none; }
+  .tree li:last-child::after{ border:0 none; }
+  .tree li:last-child::before{ border-right:2px solid var(--gold); border-radius:0 6px 0 0; }
+  .tree li:first-child::after{ border-radius:6px 0 0 0; }
+  .tree li ul::before{ content:''; position:absolute; top:0; left:50%; border-left:2px solid var(--gold); width:0; height:42px; }
 
   .node-card{
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 12px 16px;
-    box-shadow: var(--paper-shadow);
-    min-width: 150px;
-    text-align: center;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    background: var(--ivory); border: 1px solid var(--line); outline: 1px solid var(--line); outline-offset: 3px;
+    border-radius: 4px; padding: 13px 18px; min-width: 170px; text-align: center; box-shadow: var(--shadow);
   }
-  .node-card.is-root{
-    background: var(--walnut);
-    border-color: var(--walnut);
+  .node-card.is-root{ background: var(--green); border-color: var(--gold); outline-color: var(--gold-light); }
+  .node-card.is-root .n-name{ color: var(--ivory); }
+  .node-card.is-root .n-role{ color: var(--gold-light); }
+  .node-card .n-name{ font-family: var(--display); font-weight:600; font-size:1.05rem; color: var(--green); }
+  .node-card .n-years{ font-family: var(--utility); font-size:0.66rem; color: var(--maroon); margin-top:4px; }
+  .node-card .n-role{ font-family: var(--utility); font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--gold); margin-top:5px; }
+  .node-card.is-match{ border-color: var(--maroon); box-shadow: 0 0 0 3px rgba(92,26,27,0.22), var(--shadow); }
+
+  .card-actions{ margin-top:8px; }
+  .add-edit-btn{
+    font-family: var(--utility); font-size:0.64rem; letter-spacing:0.04em;
+    color: var(--maroon); background:none; border:1px solid var(--line); border-radius:999px;
+    padding:3px 10px; cursor:pointer;
   }
-  .node-card.is-root .n-name{ color: var(--cream); }
-  .node-card.is-root .n-sub{ color: var(--parchment-2); }
-  .node-card .n-name{
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 0.98rem;
-    color: var(--walnut);
-    line-height: 1.25;
+  .add-edit-btn:hover{ background: var(--ivory-2); }
+
+  /* ---------- mobile accordion ---------- */
+  .tree-accordion{ display:none; max-width:600px; margin:0 auto; }
+  details.gen-node{
+    border: 1px solid var(--line); border-radius: 6px; background: var(--ivory);
+    margin-bottom: 10px; overflow:hidden;
   }
-  .node-card .n-years{
-    font-family: var(--utility);
-    font-size: 0.68rem;
-    color: var(--sage-dark);
-    margin-top: 3px;
+  details.gen-node > summary{
+    list-style:none; cursor:pointer; padding: 14px 16px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
   }
-  .node-card .n-role{
-    font-family: var(--utility);
-    font-size: 0.64rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--brick);
-    margin-top: 5px;
-  }
-  .node-card.is-match{
-    border-color: var(--brick);
-    box-shadow: 0 0 0 3px rgba(162,70,50,0.25), var(--paper-shadow);
+  details.gen-node > summary::-webkit-details-marker{ display:none; }
+  details.gen-node > summary .marker{ font-family: var(--utility); font-size:0.9rem; color: var(--gold); transition: transform 0.2s ease; flex-shrink:0; }
+  details.gen-node[open] > summary .marker{ transform: rotate(90deg); }
+  details.gen-node .summary-text .n-name{ font-family: var(--display); font-weight:600; font-size:1.05rem; color: var(--green); }
+  details.gen-node .summary-text .n-years{ font-family: var(--utility); font-size:0.66rem; color: var(--maroon); margin-top:2px; }
+  details.gen-node .summary-text .n-role{ font-family: var(--utility); font-size:0.6rem; letter-spacing:0.05em; text-transform:uppercase; color: var(--gold); margin-top:2px; }
+  .gen-children{ padding: 4px 12px 14px 26px; border-top: 1px dashed var(--line); }
+  details.gen-node .card-actions{ padding: 0 16px 12px; }
+  .root-node{ border-color: var(--gold); }
+  details.gen-node.is-match > summary{ background: var(--ivory-2); }
+
+  @media (max-width: 760px){
+    .tree-scroll{ display:none; }
+    .scroll-hint{ display:none; }
+    .tree-accordion{ display:block; }
   }
 
-  .howto{ max-width: 680px; margin: 0 auto; padding: 26px 28px; }
+  .howto{ max-width: 700px; margin: 0 auto; padding: 28px 30px; }
   .howto p{ color: #4a3c2c; }
-  .howto pre{
-    background: var(--walnut);
-    color: var(--parchment);
-    border-radius: 8px;
-    padding: 14px 16px;
-    overflow-x: auto;
-    font-size: 0.82rem;
-  }
-  .howto code{ font-family: 'SFMono-Regular', Consolas, monospace; }
+  .howto pre{ background: var(--green-deep); color: var(--ivory); border-radius: 4px; padding: 14px 16px; overflow-x: auto; font-size: 0.82rem; }
 </style>
 
 <script>
-  // ---- Family data --------------------------------------------------------
-  // Real Kundu Parivar lineage. Structure: every person/couple is an object
-  // that can hold its own "children" array — nest as deep and as wide as
-  // the family actually is. See "Adding someone new" above for an example.
-  const treeData = {
+  // ---- Des Raj's family: real data, editable ------------------------------
+  const desRajNode = {
     name: "Ch. Des Raj Kundu & Smt. Khajani Devi",
-    years: "b. 21 Mar 1919 · DOB not recorded",
-    role: "Great grandparents — founding generation",
-    isRoot: true,
+    years: "b. 22 Mar 1919, d. 12 Jan 1979 · DOB not recorded",
+    role: "Great-grandparents — founding generation",
+    highlight: true,
     children: [
+      { name: "Shakuntla Chaudhary", years: "b. 1 Nov 1944", role: "Daughter", children: [] },
+      { name: "Bimla Kuhad", years: "b. Sept 1947, d. Aug 2015", role: "Daughter", children: [] },
+      { name: "Kamla Chaudhary", years: "b. 15 Jan 1949", role: "Daughter", children: [] },
+      { name: "Raj Chaudhary", years: "b. 31 May 1951, d. 1980", role: "Daughter", children: [] },
       {
-        name: "Dr. Bhupender Singh Kundu & Smt. Durga Kundu",
-        years: "b. 27 Jan 1964 · b. 12 Dec 1966",
-        role: "Grandparents",
+        name: "Brijender Kundu & Shanti Devi",
+        years: "b. 13 Jul 1953, d. 1999 · DOB not recorded",
+        role: "Son & daughter-in-law",
+        children: [
+          { name: "Gagan Kundu", years: "DOB not recorded", role: "Grandson", children: [] },
+          { name: "Karan Kundu", years: "DOB not recorded", role: "Grandson", children: [] }
+        ]
+      },
+      { name: "Meera Bhardwaj", years: "b. 4 Jul 1955, d. 2020", role: "Daughter", children: [] },
+      {
+        name: "Bhartinder Kundu & Santosh Devi",
+        years: "b. 26 Oct 1958, d. 2019 · DOB not recorded",
+        role: "Son & daughter-in-law",
+        children: [
+          {
+            name: "Bhuvan Kundu & Sushmita Boora",
+            years: "DOB not recorded",
+            role: "Grandson & granddaughter-in-law",
+            children: [
+              { name: "Mihir Kundu", years: "DOB not recorded", role: "Great-grandson", children: [] },
+              { name: "Nandika Kundu", years: "DOB not recorded", role: "Great-granddaughter", children: [] }
+            ]
+          },
+          { name: "Pranati Kundu", years: "DOB not recorded", role: "Granddaughter", children: [] }
+        ]
+      },
+      { name: "Pinky Boora", years: "b. 6 Dec 1959", role: "Daughter", children: [] },
+      {
+        name: "Bhupender Singh Kundu & Smt. Durga Kundu",
+        years: "b. 27 Jan 1962 · b. 12 Dec 1964",
+        role: "Son & daughter-in-law",
         children: [
           {
             name: "Mahideep Singh Kundu & Priyanka Mandal",
             years: "b. 11 May 1992 · b. 31 Jul 1993",
-            role: "Son & daughter-in-law",
+            role: "Grandson & granddaughter-in-law",
             children: [
-              { name: "Kumud Kundu", years: "b. 19 Feb 2024", role: "Daughter", children: [] }
+              { name: "Kumud Kundu", years: "b. 19 Feb 2024", role: "Great-granddaughter", children: [] }
             ]
           },
           {
             name: "Kanwaldeep Singh Kundu & Sunita Ruhil",
             years: "b. 8 Oct 1993 · b. 31 Mar 1998",
-            role: "Son & daughter-in-law",
+            role: "Grandson & granddaughter-in-law",
             children: [
-              { name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Son", children: [] }
+              { name: "Ekagra Kundu", years: "b. 13 Jun 2026", role: "Great-grandson", children: [] }
             ]
           }
         ]
@@ -254,33 +228,96 @@
     ]
   };
 
-  // ---- Render (recursive — works no matter how deep or wide the tree gets) ----
-  function buildNode(person) {
-    const li = document.createElement('li');
+  // Des Raj's brother — his own descendants aren't recorded yet.
+  const dayanandNode = {
+    name: "Dayanand",
+    years: "",
+    role: "Son of Karamchand — Des Raj's brother · line not yet recorded",
+    children: []
+  };
 
+  // The ancestral line above Des Raj, from the family chart — earliest to
+  // latest, one child each, ending at Karamchand, whose two sons (Des Raj
+  // and Dayanand) are where the tree branches. Just names — no dates known.
+  const ancestralNames = [
+    "Mahiyal", "Melu", "Jhabar", "Neer", "Gaud", "Mainak", "Shanu", "Pala",
+    "Icha", "Lakhman", "Siyana", "Saja", "Bhana", "Chanda", "Dhukmio",
+    "Sheoram", "Chaina", "Ganda", "Seetu", "Nanak", "Hardan", "Karamchand"
+  ];
+
+  function buildAncestralChain(names, finalChildren) {
+    let node = null;
+    for (let i = names.length - 1; i >= 0; i--) {
+      const children = (i === names.length - 1) ? finalChildren : [node];
+      node = { name: names[i], years: "", role: "Ancestor", children: children };
+    }
+    return node;
+  }
+
+  const treeData = buildAncestralChain(ancestralNames, [desRajNode, dayanandNode]);
+
+  // ---- Desktop: branching diagram ----
+  function buildDiagramNode(person){
+    const li = document.createElement('li');
     const card = document.createElement('div');
-    card.className = 'node-card' + (person.isRoot ? ' is-root' : '');
+    card.className = 'node-card' + (person.highlight ? ' is-root' : '');
     card.dataset.searchtext = person.name.toLowerCase();
     card.innerHTML = `
       <div class="n-name">${person.name}</div>
       ${person.years ? `<div class="n-years">${person.years}</div>` : ''}
       ${person.role ? `<div class="n-role">${person.role}</div>` : ''}
+      <div class="card-actions">
+        <button class="add-edit-btn" type="button" title="Coming soon">+ Add / Edit</button>
+      </div>
     `;
     li.appendChild(card);
-
-    if (person.children && person.children.length) {
+    if (person.children && person.children.length){
       const ul = document.createElement('ul');
-      person.children.forEach(child => ul.appendChild(buildNode(child)));
+      person.children.forEach(c => ul.appendChild(buildDiagramNode(c)));
       li.appendChild(ul);
     }
     return li;
   }
+  document.getElementById('tree-diagram-root').appendChild(buildDiagramNode(treeData));
 
-  const root = document.getElementById('tree-root');
-  root.appendChild(buildNode(treeData));
+  // ---- Mobile: collapsible <details> generations ----
+  function buildAccordionNode(person){
+    const autoOpen = person.role === "Ancestor" || person.highlight === true;
+    const details = document.createElement('details');
+    details.className = 'gen-node' + (person.highlight ? ' root-node' : '');
+    details.dataset.searchtext = person.name.toLowerCase();
+    if (autoOpen) details.open = true;
 
-  // ---- Search / highlight (never hides nodes — hiding would break the
-  // connector lines, which rely on first-child/last-child positions) ----
+    const hasChildren = person.children && person.children.length;
+
+    const summary = document.createElement('summary');
+    summary.innerHTML = `
+      <span class="summary-text">
+        <span class="n-name">${person.name}</span>
+        ${person.years ? `<span class="n-years">${person.years}</span>` : ''}
+        ${person.role ? `<span class="n-role">${person.role}</span>` : ''}
+      </span>
+      <span class="marker">${hasChildren ? '&#9656;' : ''}</span>
+    `;
+    details.appendChild(summary);
+
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+    actions.innerHTML = `<button class="add-edit-btn" type="button" title="Coming soon">+ Add / Edit</button>`;
+    details.appendChild(actions);
+
+    if (hasChildren){
+      const childWrap = document.createElement('div');
+      childWrap.className = 'gen-children';
+      person.children.forEach(c => childWrap.appendChild(buildAccordionNode(c)));
+      details.appendChild(childWrap);
+    }
+    return details;
+  }
+  document.getElementById('tree-accordion-root').appendChild(buildAccordionNode(treeData));
+
+  // ---- Search: highlight + auto-expand ancestors, never hide (hiding
+  // would break the connector lines on desktop and accordion nesting) ----
   const searchInput = document.getElementById('tree-search');
   const statusEl = document.getElementById('tree-search-status');
 
@@ -288,14 +325,26 @@
     const q = searchInput.value.trim().toLowerCase();
     let matches = 0;
     let firstMatch = null;
+
     document.querySelectorAll('.node-card').forEach(card => {
       const isMatch = q !== '' && card.dataset.searchtext.includes(q);
       card.classList.toggle('is-match', isMatch);
+      if (isMatch) { matches++; if (!firstMatch) firstMatch = card; }
+    });
+
+    document.querySelectorAll('details.gen-node').forEach(details => {
+      const isMatch = q !== '' && details.dataset.searchtext.includes(q);
+      details.classList.toggle('is-match', isMatch);
       if (isMatch) {
-        matches++;
-        if (!firstMatch) firstMatch = card;
+        // open this node and every ancestor <details> so it's visible
+        let el = details;
+        while (el) {
+          if (el.tagName === 'DETAILS') el.open = true;
+          el = el.parentElement;
+        }
       }
     });
+
     statusEl.textContent = q === '' ? '' : `${matches} match${matches === 1 ? '' : 'es'} found`;
     if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
   });

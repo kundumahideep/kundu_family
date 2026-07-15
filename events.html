@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="masthead">
   <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">K</span>
+    <a class="brandline" href="index.html">
+      <span class="crest">K</span>
       <span class="brand-name">Kundu Parivar<small>Est. 1919</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
@@ -31,8 +31,8 @@
   <div class="wrap">
     <p class="eyebrow">Dates worth remembering</p>
     <h1>Events</h1>
-    <p class="lede">Birthdays, anniversaries, and the gatherings that bring everyone back together. Sample dates below — replace with your family's real ones.</p>
-    <div class="divider"></div>
+    <p class="lede">Birthdays, gatherings, and those we hold in memory.</p>
+    <div class="ornament"><span></span></div>
   </div>
 </section>
 
@@ -50,9 +50,10 @@
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">The full record</p>
-      <h2>Birthdays &amp; anniversaries</h2>
+      <h2>Birthdays</h2>
     </div>
     <div class="ledger" id="all-ledger"></div>
+    <p class="ledger-footnote">A few family members' exact birth dates aren't on record yet (Bimla Kuhad, and several of the youngest generation) &mdash; add them to the <code>occasions</code> list in events.html once known.</p>
   </div>
 </section>
 
@@ -72,40 +73,44 @@
         <div><h3>Kumud Kundu is born</h3><p>Add your own details about this day.</p></div>
       </div>
       <div class="tl-item">
-        <span class="tl-year">—</span>
-        <div><h3>Add a gathering or milestone</h3><p>Edit the <code>&lt;div class="timeline"&gt;</code> block in events.html to add real dates — a wedding, a reunion, a ceremony.</p></div>
+        <span class="tl-year">&mdash;</span>
+        <div><h3>Add a gathering or milestone</h3><p>Edit the <code>&lt;div class="timeline"&gt;</code> block in events.html to add real dates &mdash; a wedding, a reunion, a ceremony.</p></div>
       </div>
     </div>
   </div>
 </section>
 
+<section class="alt memory-section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">In loving memory</p>
+      <h2>Those who came before</h2>
+    </div>
+    <div class="memory-list" id="memory-list"></div>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="wrap">
-    <span class="foot-note">kundufamily.in — a private family archive</span>
-    <span class="foot-note">Edit the <code>occasions</code> array in events.html to update dates</span>
+    <span class="foot-note">kundufamily.in &mdash; a private family archive</span>
+    <span class="foot-note">Edit the <code>occasions</code> and <code>inMemory</code> lists in events.html</span>
   </div>
 </footer>
 
 <style>
   .ledger{ max-width: 720px; margin: 0 auto; }
-  .ledger-row{
-    display: flex; align-items: center; gap: 18px;
-    padding: 14px 4px;
-    border-bottom: 1px dashed var(--line);
-  }
+  .ledger-row{ display: flex; align-items: center; gap: 18px; padding: 14px 4px; border-bottom: 1px dashed var(--line); }
   .ledger-row:last-child{ border-bottom: none; }
-  .ledger-date{
-    font-family: var(--display); font-weight: 600; color: var(--brick-dark);
-    width: 84px; flex-shrink: 0; font-size: 1rem;
-  }
+  .ledger-date{ font-family: var(--display); font-weight: 600; color: var(--maroon); width: 90px; flex-shrink: 0; font-size: 1rem; }
   .ledger-who{ font-family: var(--body); flex: 1; }
-  .ledger-who .lname{ font-weight: 600; color: var(--walnut); }
+  .ledger-who .lname{ font-weight: 600; color: var(--green); }
   .ledger-tag{
     font-family: var(--utility); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--sage-dark); background: var(--parchment); border: 1px solid var(--line);
+    color: var(--maroon); background: var(--ivory-2); border: 1px solid var(--line);
     padding: 3px 9px; border-radius: 999px; flex-shrink: 0;
   }
-  .empty-note{ font-family: var(--utility); font-size: 0.85rem; color: var(--sage-dark); text-align:center; padding: 20px 0; }
+  .empty-note{ font-family: var(--utility); font-size: 0.85rem; color: var(--maroon); text-align:center; padding: 20px 0; }
+  .ledger-footnote{ max-width: 720px; margin: 18px auto 0; font-family: var(--utility); font-size: 0.76rem; color: var(--maroon); text-align: center; }
 
   .timeline{ max-width: 640px; margin: 0 auto; }
   .tl-item{ display: flex; gap: 22px; padding: 18px 0; border-bottom: 1px solid var(--line); }
@@ -113,31 +118,51 @@
   .tl-year{ font-family: var(--display); font-weight: 700; color: var(--gold); font-size: 1.3rem; width: 64px; flex-shrink: 0; }
   .tl-item h3{ font-size: 1.05rem; margin-bottom: 4px; }
   .tl-item p{ margin: 0; color: #4a3c2c; font-size: 0.92rem; }
+
+  .memory-section{ background: var(--green-deep); color: var(--ivory-2); }
+  .memory-section .eyebrow{ color: var(--gold-light); }
+  .memory-section h2{ color: var(--ivory); }
+  .memory-section .section-head p{ color: var(--ivory-2); }
+  .memory-list{ max-width: 640px; margin: 0 auto; display: grid; gap: 14px; }
+  .memory-card{
+    border: 1px solid rgba(199,169,104,0.4); border-radius: 4px; padding: 16px 20px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  }
+  .memory-card .m-name{ font-family: var(--display); font-size: 1.15rem; color: var(--ivory); font-weight: 600; }
+  .memory-card .m-years{ font-family: var(--utility); font-size: 0.8rem; color: var(--gold-light); flex-shrink: 0; }
 </style>
 
 <script>
   // ---- Occasions data ---------------------------------------------------
-  // month/day only is enough for recurring birthdays & anniversaries.
+  // Only living family members with a known day + month appear here.
   const occasions = [
-    { month: 3, day: 21, name: "Ch. Des Raj Kundu", type: "Birthday" },
-    // Smt. Khajani Devi's date of birth is not on record — add it here once known.
-    { month: 1, day: 27, name: "Dr. Bhupender Singh Kundu", type: "Birthday" },
-    { month: 12, day: 12, name: "Smt. Durga Kundu", type: "Birthday" },
-    { month: 5, day: 11, name: "Mahideep Singh Kundu", type: "Birthday" },
-    { month: 7, day: 31, name: "Priyanka Mandal", type: "Birthday" },
+    { month: 1, day: 27, name: "Bhupender Singh Kundu", type: "Birthday" },
+    { month: 1, day: 15, name: "Kamla Chaudhary", type: "Birthday" },
     { month: 2, day: 19, name: "Kumud Kundu", type: "Birthday" },
-    { month: 10, day: 8, name: "Kanwaldeep Singh Kundu", type: "Birthday" },
     { month: 3, day: 31, name: "Sunita Ruhil", type: "Birthday" },
-    { month: 6, day: 13, name: "Ekagra Kundu", type: "Birthday" }
+    { month: 5, day: 11, name: "Mahideep Singh Kundu", type: "Birthday" },
+    { month: 6, day: 13, name: "Ekagra Kundu", type: "Birthday" },
+    { month: 7, day: 31, name: "Priyanka Mandal", type: "Birthday" },
+    { month: 10, day: 8,  name: "Kanwaldeep Singh Kundu", type: "Birthday" },
+    { month: 11, day: 1,  name: "Shakuntla Chaudhary", type: "Birthday" },
+    { month: 12, day: 6,  name: "Pinky Boora", type: "Birthday" },
+    { month: 12, day: 12, name: "Smt. Durga Kundu", type: "Birthday" }
+  ];
+
+  // ---- In loving memory ---------------------------------------------------
+  const inMemory = [
+    { name: "Ch. Des Raj Kundu", years: "1919 &ndash; 1979" },
+    { name: "Bimla Kuhad", years: "1947 &ndash; 2015" },
+    { name: "Raj Chaudhary", years: "1951 &ndash; 1980" },
+    { name: "Brijender Kundu", years: "1953 &ndash; 1999" },
+    { name: "Meera Bhardwaj", years: "1955 &ndash; 2020" },
+    { name: "Bhartinder Kundu", years: "1958 &ndash; 2019" }
   ];
 
   const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
   function renderLedger(el, items) {
-    if (!items.length) {
-      el.innerHTML = `<p class="empty-note">Nothing here yet.</p>`;
-      return;
-    }
+    if (!items.length) { el.innerHTML = `<p class="empty-note">Nothing here yet.</p>`; return; }
     el.innerHTML = items.map(o => `
       <div class="ledger-row">
         <span class="ledger-date">${monthNames[o.month-1]} ${o.day}</span>
@@ -150,14 +175,18 @@
   const today = new Date();
   const thisMonth = today.getMonth() + 1;
 
-  const upcoming = occasions
-    .filter(o => o.month === thisMonth)
-    .sort((a,b) => a.day - b.day);
-
+  const upcoming = occasions.filter(o => o.month === thisMonth).sort((a,b) => a.day - b.day);
   const all = [...occasions].sort((a,b) => a.month - b.month || a.day - b.day);
 
   renderLedger(document.getElementById('upcoming-ledger'), upcoming);
   renderLedger(document.getElementById('all-ledger'), all);
+
+  document.getElementById('memory-list').innerHTML = inMemory.map(p => `
+    <div class="memory-card">
+      <span class="m-name">${p.name}</span>
+      <span class="m-years">${p.years}</span>
+    </div>
+  `).join('');
 
   document.querySelector('.nav-toggle').addEventListener('click', function(){
     var nav = document.getElementById('primary-nav');
