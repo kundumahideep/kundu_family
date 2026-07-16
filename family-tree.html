@@ -116,6 +116,7 @@
   }
   .node-card.is-root{ background: var(--green); border-color: var(--gold); outline-color: var(--gold-light); }
   .node-card.is-root .n-name{ color: var(--ivory); }
+  .node-card.is-root .n-years{ color: var(--gold-light); }
   .node-card.is-root .n-role{ color: var(--gold-light); }
   .node-card .n-name{ font-family: var(--display); font-weight:600; font-size:1.05rem; color: var(--green); }
   .node-card .n-years{ font-family: var(--utility); font-size:0.66rem; color: var(--maroon); margin-top:4px; }
@@ -149,12 +150,51 @@
   .gen-children{ padding: 4px 12px 14px 26px; border-top: 1px dashed var(--line); }
   details.gen-node .card-actions{ padding: 0 16px 12px; }
   .root-node{ border-color: var(--gold); }
+  .root-node > summary{ background: var(--ivory-2); }
   details.gen-node.is-match > summary{ background: var(--ivory-2); }
+
+  .ancestral-summary > summary{ background: var(--ivory-2); }
+  .ancestral-list{
+    padding: 6px 14px 16px;
+    border-top: 1px dashed var(--line);
+    display: grid;
+    gap: 2px;
+  }
+  .ancestral-row{
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 7px 4px;
+    font-family: var(--body);
+    border-bottom: 1px dotted var(--line);
+  }
+  .ancestral-row:last-child{ border-bottom: none; }
+  .ancestral-row .a-num{
+    font-family: var(--utility); font-size: 0.66rem; color: var(--gold);
+    width: 22px; flex-shrink: 0;
+  }
+  .ancestral-row .a-name{ font-size: 0.95rem; color: var(--ink); }
+  .ancestral-row.is-match{ background: rgba(92,26,27,0.08); border-radius: 4px; }
 
   @media (max-width: 760px){
     .tree-scroll{ display:none; }
     .scroll-hint{ display:none; }
-    .tree-accordion{ display:block; }
+    .tree-accordion{ display:block; padding: 0 4px; }
+
+    details.gen-node > summary{
+      padding: 16px 14px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      row-gap: 6px;
+    }
+    details.gen-node .summary-text{ flex: 1 1 auto; min-width: 0; }
+    details.gen-node .summary-text .n-name{ font-size: 1.12rem; line-height: 1.3; }
+    details.gen-node .summary-text .n-years{ font-size: 0.72rem; }
+    details.gen-node .summary-text .n-role{ font-size: 0.66rem; }
+    details.gen-node > summary .marker{ font-size: 1.1rem; }
+
+    .gen-children{ padding: 6px 8px 16px 18px; }
+    details.gen-node{ margin-bottom: 12px; }
+    details.gen-node .card-actions{ padding: 2px 14px 14px; }
+    .add-edit-btn{ padding: 7px 14px; font-size: 0.7rem; }
   }
 
   .howto{ max-width: 700px; margin: 0 auto; padding: 28px 30px; }
@@ -314,7 +354,39 @@
     }
     return details;
   }
-  document.getElementById('tree-accordion-root').appendChild(buildAccordionNode(treeData));
+
+  // The 22-generation ancestral chain would otherwise nest 22 boxes deep,
+  // each indented further than the last, until cards get squeezed off the
+  // screen. Instead, show it as ONE tappable entry containing a flat list.
+  function buildAncestralSummaryNode(names){
+    const details = document.createElement('details');
+    details.className = 'gen-node ancestral-summary';
+    const summary = document.createElement('summary');
+    summary.innerHTML = `
+      <span class="summary-text">
+        <span class="n-name">Ancestral Line</span>
+        <span class="n-years">${names.length} generations recorded</span>
+        <span class="n-role">Mahiyal to Karamchand</span>
+      </span>
+      <span class="marker">&#9656;</span>
+    `;
+    details.appendChild(summary);
+
+    const list = document.createElement('div');
+    list.className = 'ancestral-list';
+    list.innerHTML = names.map((n, i) => `
+      <div class="ancestral-row" data-searchtext="${n.toLowerCase()}">
+        <span class="a-num">${i + 1}</span><span class="a-name">${n}</span>
+      </div>
+    `).join('');
+    details.appendChild(list);
+    return details;
+  }
+
+  const accordionRoot = document.getElementById('tree-accordion-root');
+  accordionRoot.appendChild(buildAncestralSummaryNode(ancestralNames));
+  accordionRoot.appendChild(buildAccordionNode(desRajNode));
+  accordionRoot.appendChild(buildAccordionNode(dayanandNode));
 
   // ---- Search: highlight + auto-expand ancestors, never hide (hiding
   // would break the connector lines on desktop and accordion nesting) ----
@@ -326,22 +398,33 @@
     let matches = 0;
     let firstMatch = null;
 
+    // Desktop diagram covers every person once — the count comes from here.
     document.querySelectorAll('.node-card').forEach(card => {
       const isMatch = q !== '' && card.dataset.searchtext.includes(q);
       card.classList.toggle('is-match', isMatch);
       if (isMatch) { matches++; if (!firstMatch) firstMatch = card; }
     });
 
+    // Mobile accordion (Des Raj's family) — highlight + auto-expand ancestors.
     document.querySelectorAll('details.gen-node').forEach(details => {
-      const isMatch = q !== '' && details.dataset.searchtext.includes(q);
+      const isMatch = q !== '' && details.dataset.searchtext && details.dataset.searchtext.includes(q);
       details.classList.toggle('is-match', isMatch);
       if (isMatch) {
-        // open this node and every ancestor <details> so it's visible
         let el = details;
         while (el) {
           if (el.tagName === 'DETAILS') el.open = true;
           el = el.parentElement;
         }
+      }
+    });
+
+    // Mobile flat ancestral list — highlight + open its containing summary.
+    document.querySelectorAll('.ancestral-row').forEach(row => {
+      const isMatch = q !== '' && row.dataset.searchtext.includes(q);
+      row.classList.toggle('is-match', isMatch);
+      if (isMatch) {
+        const d = row.closest('details');
+        if (d) d.open = true;
       }
     });
 
